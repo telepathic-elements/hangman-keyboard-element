@@ -69,7 +69,14 @@ export default class HangmanKeyboardElement extends TelepathicElement{
 
     onAction(event){
         console.log(event," occured");
-        let btn = event.path[0];
+        let btn;
+        try{
+            btn = event.path[0];
+        }catch(err){
+            //Firefox has issues with event.path likely due to no proper shadowdom support
+            console.warn(err);
+            btn = event.originalTarget;
+        }
         this.parentElement.setAttribute('lastkeypress',btn.id);
         //event.sourceElement.setAttribute("lastkey",btn.id);
     }
