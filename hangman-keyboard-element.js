@@ -45,6 +45,8 @@ export default class HangmanKeyboardElement extends TelepathicElement{
             btn.innerHTML = id;
             btn.setAttribute("id",id);
             btn.classList.add("green-button");
+            btn.classList.add("rounded-button");
+           
             btn.style.display = "inline";
             btn.onclick = this.onAction;
             this.$.appendChild(btn);
