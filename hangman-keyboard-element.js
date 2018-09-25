@@ -18,13 +18,20 @@ export default class HangmanKeyboardElement extends TelepathicElement{
                 console.log("btn in attrChange is: ",btn);
                 if(btn){
                     btn.disabled = true;
+                    btn.classList.remove("green-button");
+                    btn.classList.add("red-button");
                 }
                 break;
             }
             case "reset" : {
                 let btns = this.$.querySelectorAll('button');
                 btns.forEach((btn)=>{
+                    if(btn.id =="reset"){
+                        return;
+                    }
                     btn.disabled = false;
+                    btn.classList.remove("red-button");
+                    btn.classList.add("green-button");
                 });
                 break;
             }   
@@ -37,6 +44,7 @@ export default class HangmanKeyboardElement extends TelepathicElement{
             let id = String.fromCharCode(65 + i);
             btn.innerHTML = id;
             btn.setAttribute("id",id);
+            btn.classList.add("green-button");
             btn.style.display = "inline";
             btn.onclick = this.onAction;
             this.$.appendChild(btn);
@@ -44,6 +52,7 @@ export default class HangmanKeyboardElement extends TelepathicElement{
         let btn = document.createElement("button");
         btn.setAttribute("id","reset");
         btn.innerHTML = "Reset";
+        btn.classList.add("red-button");
         btn.onclick = this.reset;
         this.$.appendChild(btn);
     }
